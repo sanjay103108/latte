@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Like You This Much!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Dancing Script', cursive;
+    background: linear-gradient(135deg, #ffebee 0%, #fff0f5 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    perspective: 1000px;
+    position: relative;
+}
+
+/* Add a subtle animated background pattern */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 100% 50%, transparent 20%, rgba(255,255,255,0.3) 21%, transparent 22%),
+        radial-gradient(circle at 0% 50%, transparent 20%, rgba(255,255,255,0.3) 21%, transparent 22%);
+    background-size: 50px 50px;
+    animation: backgroundMove 30s linear infinite;
+    opacity: 0.3;
+}
+
+.container {
+    text-align: center;
+    padding: 40px;
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    transform-style: preserve-3d;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.image-container {
+    margin-bottom: 30px;
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    padding: 20px;
+}
+
+.glow-effect {
+    max-width: 85%;
+    height: auto;
+    border-radius: 25px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15),
+                0 0 30px rgba(255, 105, 180, 0.3);
+    transition: all 0.5s ease-in-out;
+    filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.5));
+}
+
+.glow-effect:hover {
+    transform: scale(1.15) rotate(5deg);
+    filter: drop-shadow(0 0 30px rgba(255, 105, 180, 0.8));
+}
+
+.magic-text {
+    font-size: 4em;
+    background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4, #ff8da1);
+    background-size: 300% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: gradient 5s linear infinite;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+
+.progress-container {
+    width: 90%;
+    margin: 0 auto 40px;
+    transform: translateZ(20px);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff69b4, #ff8da1, #ff69b4);
+    background-size: 200% auto;
+    animation: fillBar 2.5s ease-out forwards, gradientMove 3s infinite;
+}
+
+/* Audio control styling */
+.audio-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.audio-control:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Enhanced animations */
+@keyframes backgroundMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(5deg); }
+}
+
+@keyframes fillBar {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* Add volume indicator */
+.volume-indicator {
+    position: fixed;
+    bottom: 70px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 0.8em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.audio-control:hover + .volume-indicator {
+    opacity: 1;
+}
+    </style>
+</head>
+<body>
+    <div class="sparkles" id="sparkles"></div>
+    <div class="stars" id="stars"></div>
+    <div class="rainbow"></div>
+    <div class="clouds" id="clouds"></div>
+    <div class="floating-hearts" id="floating-hearts"></div>
+    <div class="butterflies" id="butterflies"></div>
+    <div class="container">
+        <div class="image-container">
+            <img src="congo.png" alt="Congo" id="congoImage" class="glow-effect">
+        </div>
+        <h1 class="magic-text">I like you this much!!</h1>
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+    <div id="cats-container"></div>
+    <div id="message-container"></div>
+    
+    <!-- Audio Controls -->
+    <div class="audio-control" id="audioControl">🔈</div>
+    <div class="volume-indicator">Click to toggle sound</div>
+    
+    <audio id="backgroundMusic" loop>
+        <source src="audio\Gigi Perez - Sailor Song [Official Audio].mp3" type="audio/mp3">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // Previous JavaScript code remains the same
+        // Add audio functionality
+        const audio = document.getElementById('backgroundMusic');
+        const audioControl = document.getElementById('audioControl');
+        let isPlaying = false;
+
+        // Function to handle audio
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                audioControl.textContent = '🔈';
+                isPlaying = false;
+            } else {
+                audio.play();
+                audioControl.textContent = '🔊';
+                isPlaying = true;
+            }
+        }
+
+        // Add click event listener to audio control
+        audioControl.addEventListener('click', toggleAudio);
+
+        // Auto-play audio when page loads (many browsers block this)
+        window.addEventListener('load', () => {
+            // Try to play audio
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    audioControl.textContent = '🔊';
+                }).catch(error => {
+                    console.log("Auto-play was prevented");
+                    isPlaying = false;
+                    audioControl.textContent = '🔈';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

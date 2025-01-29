@@ -1,0 +1,175 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pacifico', cursive;
+  background: linear-gradient(135deg, #ffebee 0%, #fff0f5 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  perspective: 1000px;
+}
+
+.container {
+  text-align: center;
+  padding: 20px;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.image-container {
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+  position: relative;
+}
+
+.glow-effect {
+  max-width: 80%;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
+  filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
+}
+
+.glow-effect:hover {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 20px rgba(255, 105, 180, 0.8));
+}
+
+.magic-text {
+  font-size: 3em;
+  background: linear-gradient(45deg, #ff69b4, #ff1493, #ff69b4);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradient 3s linear infinite;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-container {
+  width: 100%;
+  margin-bottom: 30px;
+  transform: translateZ(20px);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.progress {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #ff69b4, #ff8da1, #ff69b4);
+  background-size: 200% auto;
+  animation: fillBar 2s ease-out forwards, gradientMove 3s infinite;
+}
+
+.cat {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image: url("https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f408.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}
+
+.cat:hover {
+  transform: scale(1.2) rotate(10deg);
+  filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
+}
+
+.butterfly {
+  position: absolute;
+  font-size: 24px;
+  pointer-events: none;
+  animation: butterflyFloat 15s linear infinite;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkleAnimation 2s linear infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes fillBar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes butterflyFloat {
+  0% {
+      transform: translate(-100vw, random(100vh)) rotate(0deg);
+  }
+  50% {
+      transform: translate(50vw, random(100vh)) rotate(180deg);
+  }
+  100% {
+      transform: translate(100vw, random(100vh)) rotate(360deg);
+  }
+}
+
+@keyframes sparkleAnimation {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1) rotate(180deg); opacity: 1; }
+  100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+#message-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+.message {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px 30px;
+  border-radius: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  animation: messagePopup 5s forwards;
+  font-size: 1.2em;
+  color: #ff69b4;
+}
+
+@keyframes messagePopup {
+  0% { transform: translateY(100px); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100px); opacity: 0; }
+}
